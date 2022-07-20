@@ -25,7 +25,9 @@ SECRET_KEY = '231df12d-d4f0-4eea-8f70-bacaa488be63'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://carsellingappmain.herokuapp.com']
+
+PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
@@ -41,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'ckeditor',
+    'ckeditor_uploader'
 ]
 
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -80,10 +84,10 @@ WSGI_APPLICATION = 'CarSelling.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'carselling_db',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'NAME': 'def82gckk3u9c',
+        'USER': 'yarliheotqfrlt',
+        'PASSWORD': 'dfd8d226dcd528ead6ae93a5cd9b9d8b648bf1f5484c052159945d0a17f01c1b',
+        'HOST': 'ec2-3-217-14-181.compute-1.amazonaws.com',
     }
 }
 
@@ -123,7 +127,7 @@ LOGIN_URL = 'login'
 # STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 STATIC_URL = '/static/'
-SATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
@@ -131,6 +135,14 @@ STATICFILES_DIRS = [
 # Media
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Extra lookup directories for collectstatic to find static files
+'''STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)'''
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # Messages
@@ -151,3 +163,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
