@@ -21,6 +21,8 @@
 
 ## Django 
 1. Clone Repo to A Folder
+![alt text](docs/gitclone.png)
+![alt text](docs/gitclonecmd.png)
 
 > Creating a virtual environment is not necessary
 2. Create A Virtual Env 
@@ -29,10 +31,14 @@ py venv (VENV Name)
 cd (VENV Name)
 source bin /activate (BASH)
 ```
+![alt text](docs/createvirtualenv.png)
+
 3. Install Django Using Pip 
 ```sh
 pip install django django-ckeditor django-multiselectfield
 ```
+![alt text](docs/installpackages.png)
+
 4. Create Database in PostgreSQL, Makemigrations, Migrate the migrations to the DB, Create a uper user and collect static files e.g., css, js and fonts
 ```sh
 py manage.py makemigrations
@@ -40,7 +46,18 @@ py manage.py migrate
 py manage.py createsuperuser
 py manage.py collectstatic
 ```
+![alt text](docs/migratetodb.png)
+
 5. Run Python Server 
 ```sh
 python manage.py runserver
 ```
+![alt text](docs/runserver.png)
+
+LIVE SITE
+Login Page
+![alt text](docs/loginpage.png)
+Home Page
+![alt text](docs/homepage.png)
+Contact Page
+![alt text](docs/contactpage.png)
